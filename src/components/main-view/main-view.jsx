@@ -38,9 +38,13 @@ export class MainView extends React.Component {
 
   render() {
     const { movies, selectedMovie } = this.state;
-
-    if (selectedMovie) return <MovieView movie={selectedMovie} />;
-
+    if (selectedMovie)
+      return (
+        <MovieView
+          onBackClick={() => this.setSelectedMovie(null)}
+          movie={selectedMovie}
+        />
+      );
     if (movies.length === 0)
       return <div className="main-view">The list is empty!</div>;
 
@@ -50,7 +54,7 @@ export class MainView extends React.Component {
           <MovieCard
             key={movie._id}
             movie={movie}
-            onMovieClick={(movie) => {
+            onMovieClick={() => {
               this.setSelectedMovie(movie);
             }}
           />
